@@ -50,9 +50,13 @@ public class Board
         
         for(iterator = 0; iterator < board[column].length; iterator++) {
         	if(board[column][iterator].getColor() == null) {
-        		board[column][iterator].setColor(color);
-                placedCells++;
-                break;
+        		try {
+	        		board[column][iterator].setColor(color);
+	                placedCells++;
+	                break;
+        		}catch(Exception e) {
+        			throw new IllegalArgumentException(e.getMessage());
+        		}
         	}
         }
         
@@ -88,6 +92,9 @@ public class Board
     
     public String checkRow(int row) {
 		
+    	if(row >= board[0].length)
+			throw new IndexOutOfBoundsException("Row does not exist");
+    	
 		int[] counter = {0, 0};
 		for(int i = 0; i < board.length; i++) {
 
@@ -100,6 +107,25 @@ public class Board
     			return "red";
 		}
 
+		if(counter[0] >= 4)
+			return "green";
+			
+		if(counter[1] >= 4)
+			return "red";
+		
+		return "none";
+	}
+    
+public String checkColumn(int column) {
+	
+		if(column >= board.length)
+			throw new IndexOutOfBoundsException("Column does not exist");
+		
+		int[] counter = {0, 0};
+		for(int i = 0; i < board[column].length; i++) {
+
+            counter = counter(counter, column, i);
+		}
 		if(counter[0] >= 4)
 			return "green";
 			

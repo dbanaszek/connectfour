@@ -66,6 +66,13 @@ public class BoardTest
         assertEquals(true, true);
     }
     
+    @Test(expected = IllegalArgumentException.class)
+    public void checkFillColumnWrongColor(){
+    	board.fillCell("black", 2);
+    	
+    	assertEquals(true, true);
+    }
+    
     @Test
     public void checkRowGreen() {
     	for(int i = 0; i < 4; i++ ){
@@ -85,8 +92,43 @@ public class BoardTest
     	assertThat(board.checkRow(0), equalTo("none"));
     }
     
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void checkRowOutOfRange() {
+    	
+    	board.checkRow(52);
+    	assertEquals(true, true);
+    }
     
+    @Test
+    public void checkColumnGreen() {
+    	
+    	for(int i = 0; i < 2; i++ ){
+            larger.fillCell("green", 5);
+            larger.fillCell("red", 5);
+        }
+    	
+    	for(int i = 0; i < 4; i++ ){
+    		larger.fillCell("green", 5);
+    	}
+    	
+    	assertThat(larger.checkColumn(5), equalTo("green"));
+    }
     
+    @Test
+    public void checkColumnFalse() {
+    	for(int i = 0; i < 10; i+=2 ){
+            larger.fillCell("green", 5);
+            larger.fillCell("red", 5);
+        }
+    	
+    	assertThat(board.checkRow(0), equalTo("none"));
+    }
     
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void checkColumnOutOfRange() {
+    	
+    	board.checkColumn(32);
+    	assertEquals(true, true);
+    }
     
 }
