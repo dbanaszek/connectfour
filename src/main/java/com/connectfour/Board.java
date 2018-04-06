@@ -30,6 +30,16 @@ public class Board
         isFull = new boolean[columns];
         iterator = 0;
         placedCells = 0;
+        
+        for(int i = 0; i < columns; i++) {
+        	for(int j = 0; j < rows; j++) {
+        		board[i][j] = new Cell();
+        	}
+        }
+    }
+    
+    public Cell[][] getBoard() {
+        return board;
     }
 
     public int fillCell(String color, int column) {
