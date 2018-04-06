@@ -138,8 +138,8 @@ public class BoardTest
     	for(int i = 3; i < 6; i++) {
     		board.fillCell("green", i);
     	}
-    	board.fillCell("red", 3);
     	
+    	board.fillCell("red", 3);
     	board.fillCell("green", 4);
     	board.fillCell("green", 5);
     	
@@ -158,8 +158,8 @@ public class BoardTest
     	for(int i = 3; i < 6; i++) {
     		board.fillCell("green", i);
     	}
-    	board.fillCell("red", 3);
     	
+    	board.fillCell("red", 3);
     	board.fillCell("green", 4);
     	board.fillCell("green", 5);
     	
@@ -192,8 +192,8 @@ public class BoardTest
     	for(int i = 3; i < 6; i++) {
     		board.fillCell("green", i);
     	}
-    	board.fillCell("red", 3);
     	
+    	board.fillCell("red", 3);
     	board.fillCell("green", 4);
     	board.fillCell("green", 5);
     	
@@ -212,8 +212,8 @@ public class BoardTest
     	for(int i = 3; i < 6; i++) {
     		board.fillCell("green", i);
     	}
-    	board.fillCell("red", 3);
     	
+    	board.fillCell("red", 3);
     	board.fillCell("green", 4);
     	board.fillCell("green", 5);
     	
@@ -223,5 +223,83 @@ public class BoardTest
     	board.fillCell("red", 5);
     	
     	assertThat(board.checkRightDiagonal(2), equalTo("red"));
+    }
+    
+    @Test
+    public void checkLeftDiagonalGreen() {
+    	
+    	for(int i = 2; i < 5; i++) {
+    		board.fillCell("red", i);
+    	}
+    	board.fillCell("green", 5);
+    	
+    	board.fillCell("red", 2);
+    	board.fillCell("red", 3);
+    	board.fillCell("green", 4);
+    	
+    	board.fillCell("red", 2);
+    	board.fillCell("green", 3);
+    	
+    	board.fillCell("green", 2);
+    	
+    	
+    	assertThat(board.checkLeftDiagonal(5, 0), equalTo("green"));
+    	
+    }
+    
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void checkLeftDiagonalException() {
+    	
+    	board.checkLeftDiagonal(52, 1204);
+    	assertEquals(true, true);
+    }
+    
+    @Test
+    public void checkLeftDiagonalFalse() {
+    	
+    	for(int i = 2; i < 5; i++) {
+    		board.fillCell("red", i);
+    	}
+    	board.fillCell("green", 5);
+    	
+    	board.fillCell("red", 2);
+    	board.fillCell("red", 3);
+    	board.fillCell("green", 4);
+    	
+    	board.fillCell("red", 2);
+    	board.fillCell("red", 3);
+    	
+    	board.fillCell("green", 2);
+    	
+    	assertThat(board.checkLeftDiagonal(5, 0), equalTo("none"));
+    }
+    
+    @Test
+    public void checkLeftDiagonalGreenOneArgument() {
+    	
+    	for(int i = 2; i < 5; i++) {
+    		board.fillCell("red", i);
+    	}
+    	board.fillCell("green", 5);
+    	
+    	board.fillCell("red", 2);
+    	board.fillCell("red", 3);
+    	board.fillCell("green", 4);
+    	
+    	board.fillCell("red", 2);
+    	board.fillCell("green", 3);
+    	
+    	board.fillCell("green", 2);
+    	
+    	
+    	assertThat(board.checkLeftDiagonal(5), equalTo("green"));
+    	
+    }
+    
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void checkLeftDiagonalExceptionOneArgument() {
+    	
+    	board.checkLeftDiagonal(234);
+    	assertEquals(true, true);
     }
 }

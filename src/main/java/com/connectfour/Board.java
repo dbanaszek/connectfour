@@ -175,4 +175,48 @@ public class Board
     	
     	return result;
     }
+    
+    public String checkLeftDiagonal(int column, int row) {
+		
+	if(row >= board[0].length || column >= board.length)
+		throw new IndexOutOfBoundsException("Row does not exist");
+	
+		int[] counter = {0, 0};
+		
+		while(column != 0 && row != board[column].length) {
+    		column--;
+    		row++;
+    	}
+		
+		while(column < board.length && row >= 0) {
+			counter = counter(counter, column, row);
+			column++;
+			row--;
+		}
+		
+		if(counter[0] >= 4)
+			return "green";
+		
+		if(counter[1] >= 4)
+			return "red";
+	
+		return "none";
+	}
+    
+public String checkLeftDiagonal(int column) {
+    	
+    	String result = "none";
+    	
+    	if(column >= board.length)
+    		throw new IndexOutOfBoundsException("Row does not exist");
+    	
+    	for(int i = 0; i< board[column].length; i++) {
+    		result = checkLeftDiagonal(column, i);
+    		if(!result.equalsIgnoreCase("none"))
+    			break;
+    	}
+    	
+    	return result;
+    }
+    
 }
