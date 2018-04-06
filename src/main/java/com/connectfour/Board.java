@@ -203,7 +203,7 @@ public class Board
 		return "none";
 	}
     
-public String checkLeftDiagonal(int column) {
+    public String checkLeftDiagonal(int column) {
     	
     	String result = "none";
     	
@@ -217,6 +217,15 @@ public String checkLeftDiagonal(int column) {
     	}
     	
     	return result;
+    }
+
+    public boolean CheckDraw(){
+
+	    int boardSize = board.length * board[0].length;
+	    if(placedCells >= boardSize)
+	        return true;
+	
+	    return false;
     }
     
 }

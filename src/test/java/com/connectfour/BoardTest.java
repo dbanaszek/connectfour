@@ -302,4 +302,46 @@ public class BoardTest
     	board.checkLeftDiagonal(234);
     	assertEquals(true, true);
     }
+    
+    @Test
+    public void checkDraw() {
+    	
+    	boolean change = true;
+    	
+    	for(int j = 0; j <6; j++) {
+    		for(int i = 0; i < 7; i++) {
+    			if(change){
+    				board.fillCell("green", i);
+    				change = false;
+    			}
+    			else {
+    				board.fillCell("red", i);
+    				change = false;
+    			}
+    		}
+    	}
+    	
+    	assertThat(board.CheckDraw(), is(true));
+    }
+    
+    @Test
+    public void checkDrawFalse() {
+    	
+    	boolean change = true;
+    	
+    	for(int j = 0; j <5; j++) {
+    		for(int i = 0; i < 7; i++) {
+    			if(change) {
+    				board.fillCell("green", i);
+    				change = false;
+    			}
+    			else {
+    				board.fillCell("red", i);
+    				change = false;
+    			}
+    		}
+    	}
+    	
+    	assertThat(board.CheckDraw(), is(false));
+    }
 }
