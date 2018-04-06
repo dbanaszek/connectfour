@@ -159,4 +159,20 @@ public class Board
 	
 		return "none";
 	}
+    
+    public String checkRightDiagonal(int column) {
+    	
+    	String result = "none";
+    	
+    	if(column >= board.length)
+    		throw new IndexOutOfBoundsException("Row does not exist");
+    	
+    	for(int i = 0; i< board[column].length; i++) {
+    		result = checkRightDiagonal(column, i);
+    		if(!result.equalsIgnoreCase("none"))
+    			break;
+    	}
+    	
+    	return result;
+    }
 }

@@ -174,8 +174,54 @@ public class BoardTest
     @Test(expected = IndexOutOfBoundsException.class)
     public void checkRightDiagonalException() {
     	
-    	
     	board.checkRightDiagonal(52, 1204);
     	assertEquals(true, true);
+    }
+    
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void checkRightDiagonalExceptionOneArgument() {
+    	
+    	board.checkRightDiagonal(52);
+    	assertEquals(true, true);
+    }
+    
+    @Test
+    public void checkRightDiagonalFalseOneArgument() {
+    	
+    	board.fillCell("red", 2);
+    	for(int i = 3; i < 6; i++) {
+    		board.fillCell("green", i);
+    	}
+    	board.fillCell("red", 3);
+    	
+    	board.fillCell("green", 4);
+    	board.fillCell("green", 5);
+    	
+    	board.fillCell("red", 4);
+    	board.fillCell("green", 5);
+    	
+    	board.fillCell("green", 5);
+    	
+    	assertThat(board.checkRightDiagonal(2), equalTo("none"));
+    }
+    
+    @Test
+    public void checkRightDiagonalRedOneArgument() {
+    	
+    	board.fillCell("red", 2);
+    	for(int i = 3; i < 6; i++) {
+    		board.fillCell("green", i);
+    	}
+    	board.fillCell("red", 3);
+    	
+    	board.fillCell("green", 4);
+    	board.fillCell("green", 5);
+    	
+    	board.fillCell("red", 4);
+    	board.fillCell("green", 5);
+    	
+    	board.fillCell("red", 5);
+    	
+    	assertThat(board.checkRightDiagonal(2), equalTo("red"));
     }
 }
