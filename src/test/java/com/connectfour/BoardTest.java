@@ -6,6 +6,7 @@ import org.junit.Test;
 import com.connectfour.Board;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -64,6 +65,26 @@ public class BoardTest
         }
         assertEquals(true, true);
     }
+    
+    @Test
+    public void checkRowGreen() {
+    	for(int i = 0; i < 4; i++ ){
+            board.fillCell("green", i);
+        }
+    	
+    	assertThat(board.checkRow(0), equalTo("green"));
+    }
+    
+    @Test
+    public void checkRowFalse() {
+    	for(int i = 0; i < 12; i+=2 ){
+            larger.fillCell("green", i);
+            larger.fillCell("red", i+1);
+        }
+    	
+    	assertThat(board.checkRow(0), equalTo("none"));
+    }
+    
     
     
     

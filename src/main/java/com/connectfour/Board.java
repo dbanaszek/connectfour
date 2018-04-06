@@ -61,4 +61,51 @@ public class Board
 
         return iterator;
     }
+    
+    private int[] counter(int[] count, int column, int row){
+
+    	try{
+    		
+	        switch(board[column][row].getColor()) {
+	
+	            case "green": count[0]++;
+	                count[1] = 0;
+	                break;
+	
+	            case "red":   count[1]++;
+	                count[0] = 0;
+	                break;
+	
+	            default: 	  count[0] = 0;
+	                count[1] = 0;
+	
+	        }
+    	}catch(Exception e) {
+    	}
+
+        return count;
+    }
+    
+    public String checkRow(int row) {
+		
+		int[] counter = {0, 0};
+		for(int i = 0; i < board.length; i++) {
+
+            counter = counter(counter, i, row);
+            
+            if(counter[0] >= 4)
+    			return "green";
+    			
+    		if(counter[1] >= 4)
+    			return "red";
+		}
+
+		if(counter[0] >= 4)
+			return "green";
+			
+		if(counter[1] >= 4)
+			return "red";
+		
+		return "none";
+	}
 }
