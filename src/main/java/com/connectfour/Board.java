@@ -228,4 +228,32 @@ public class Board
 	    return false;
     }
     
+    public String checkWinningCondition(String color, int column, int row){
+
+    	if(color.equals("red") || color.equals("green")) {
+		    switch (1){
+	            case 1:
+	                if (color.equals(checkLeftDiagonal(column)))
+	                    return color;
+	
+	            case 2:
+	                if (color.equals(checkRightDiagonal(column)))
+	                    return color;
+	
+	            case 3:
+	                if (color.equals(checkColumn(column)))
+	                    return color;
+	
+	            case 4:
+	                if (color.equals(checkRow(row)))
+	                    return color;
+	
+	            default:
+	                return "none";
+	        }
+    	}
+    	else
+    		throw new IllegalArgumentException("Unexpected color");
+    }
+    
 }

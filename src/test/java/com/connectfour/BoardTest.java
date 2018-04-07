@@ -344,4 +344,87 @@ public class BoardTest
     	
     	assertThat(board.CheckDraw(), is(false));
     }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void checkWinningConditionWrongColor() {
+    	
+    	board.checkWinningCondition("blue", 5, 2);
+    	
+    	assertEquals(true, true);
+    }
+    
+    @Test
+    public void checkWinningConditionRightDiagonal() {
+    	board.fillCell("red", 2);
+    	for(int i = 3; i < 6; i++) {
+    		board.fillCell("green", i);
+    	}
+    	
+    	board.fillCell("red", 3);
+    	board.fillCell("green", 4);
+    	board.fillCell("green", 5);
+    	
+    	board.fillCell("red", 4);
+    	board.fillCell("green", 5);
+    	
+    	board.fillCell("red", 5);
+    	
+    	assertThat(board.checkWinningCondition("red", 3, 1), equalTo("red"));
+    }
+    
+    @Test
+    public void checkWinningConditionLeftDiagonal() {
+    	
+    	for(int i = 2; i < 5; i++) {
+    		board.fillCell("red", i);
+    	}
+    	board.fillCell("green", 5);
+    	
+    	board.fillCell("red", 2);
+    	board.fillCell("red", 3);
+    	board.fillCell("green", 4);
+    	
+    	board.fillCell("red", 2);
+    	board.fillCell("green", 3);
+    	
+    	board.fillCell("green", 2);
+    	
+    	
+    	assertThat(board.checkWinningCondition("green", 3, 2), equalTo("green"));
+    }
+    
+    @Test
+    public void checkWinningConditionRow() {
+    	for(int i = 0; i < 4; i++ ){
+            board.fillCell("green", i);
+        }
+    	
+    	assertThat(board.checkWinningCondition("green", 4, 0), equalTo("green"));
+    }
+    
+    @Test
+    public void checkWinningConditionColumn() {
+    	for(int i = 0; i < 2; i++ ){
+            larger.fillCell("red", 5);
+            larger.fillCell("green", 5);
+        }
+    	
+    	for(int i = 0; i < 4; i++ ){
+    		larger.fillCell("red", 5);
+    	}
+    	
+    	assertThat(larger.checkWinningCondition("red", 5, 5), equalTo("red"));
+    }
+    
+    @Test
+    public void checkWinningConditionNone() {
+    	for(int i = 0; i < 6; i+= 2){
+            board.fillCell("green", i);
+            board.fillCell("red", i);
+        }
+    	
+    	assertThat(board.checkWinningCondition("green", 4, 0), equalTo("none"));
+    }
 }
+
+
