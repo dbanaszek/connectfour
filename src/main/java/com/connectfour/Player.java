@@ -27,6 +27,9 @@ public class Player {
     }
 
     public void setColor(String color) {
+    	if(!color.equals("red") && !color.equals("green"))
+    		throw new IllegalArgumentException("Wrong color name");
+    	
         this.color = color;
     }
 }
