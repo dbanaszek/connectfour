@@ -4,17 +4,36 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
 import java.io.ByteArrayInputStream;
+import java.util.Arrays;
+import java.util.Collection;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+@RunWith(Parameterized.class)
 public class GameStatusTest {
-	
+
+    private String gWord;
 	private Board board;
 	private GameStatus status;
 	private Player player;
 	private Player playerTwo;
+
+    @Parameters
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][] {
+                {"blue"}, {"black"}, {"asdasdasd"}, {"12e813h00220@@#$)&)&!$"}, {"qwdqwd               qwd   fqfe"}
+        });
+    }
+
+    public GameStatusTest(String word){
+        gWord = word;
+    }
 	
 	@Before
     public void setUp(){
@@ -96,9 +115,11 @@ public class GameStatusTest {
         assertThat("red", equalToIgnoringCase(playerTwo.getColor()));
     }
 
+
+
     @Test(expected = IllegalArgumentException.class)
     public void checkSetColorsException(){
-        ByteArrayInputStream input = new ByteArrayInputStream("blue".getBytes());
+        ByteArrayInputStream input = new ByteArrayInputStream(gWord.getBytes());
         System.setIn(input);
 
         status.setColors(player, playerTwo);

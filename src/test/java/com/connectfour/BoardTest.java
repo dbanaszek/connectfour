@@ -17,6 +17,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Unit test for simple Board.
  */
+//@RunWith(Parameterized.class)
 @RunWith(DataDrivenTestRunner.class)
 public class BoardTest
 {
@@ -76,9 +77,13 @@ public class BoardTest
         }
         assertEquals(true, true);
     }
-    
+
+
     @Test(expected = IllegalArgumentException.class)
-    public void checkFillColumnWrongColor(){
+	//@DataLoader(filePaths = "ColumnWrongColor.csv")
+    public void checkFillColumnWrongColor(
+			//@Param(name = "color") String color
+	){
     	board.fillCell("black", 2);
     	
     	assertEquals(true, true);
@@ -125,9 +130,9 @@ public class BoardTest
     @Test
 	@DataLoader(filePaths = "ColumnGreen.csv")
     public void checkColumnGreen(
-    		@Param(name = "c1") int c1,  //5
-			@Param(name = "c2") int c2,  //2
-			@Param(name = "c3") int c3   //10
+    		@Param(name = "c1") int c1,
+			@Param(name = "c2") int c2,
+			@Param(name = "c3") int c3
 	) {
     	boolean red = false;
 
@@ -143,8 +148,8 @@ public class BoardTest
 			else
 				red = placeCell(red, c3);
 		}
-		
-    	assertThat(larger.checkColumn(10), equalTo("green"));
+
+    	assertThat(larger.checkColumn(c3), equalTo("green"));
     }
     
     @Test

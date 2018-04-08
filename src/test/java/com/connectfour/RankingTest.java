@@ -7,10 +7,32 @@ import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
+import java.util.Arrays;
+import java.util.Collection;
+
+@RunWith(Parameterized.class)
 public class RankingTest {
-	
+
+	private int rOne, rTwo, rExpected;
 	private Player player;
 	private Ranking ranking, rankingTwo;
+
+	@Parameters
+	public static Collection<Object[]> data() {
+		return Arrays.asList(new Object[][] {
+				{30, 53, 83}, {50, 1223, 1273}, {54, 23, 77}, {23, -43, 0}, {2, -5, 0}, {-34, -34, 0}
+		});
+	}
+
+	public RankingTest(int one, int two, int expected) {
+		rOne = one;
+		rTwo = two;
+		rExpected = expected;
+	}
 	
 	@Before
 	public void setUp(){
@@ -36,19 +58,10 @@ public class RankingTest {
 	@Test
 	public void checkSetPoints() {
 		
-		ranking.setPoints(30);
-		ranking.setPoints(54);
+		ranking.setPoints(rOne);
+		ranking.setPoints(rTwo);
 		
-		assertThat(ranking.getPoints(), equalTo(84));
-	}
-	
-	@Test
-	public void checkSetPointsMinus() {
-		
-		ranking.setPoints(10);
-		ranking.setPoints(-11);
-		
-		assertThat(ranking.getPoints(), equalTo(0));
+		assertThat(ranking.getPoints(), equalTo(rExpected));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
