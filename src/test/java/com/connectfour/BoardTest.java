@@ -25,6 +25,12 @@ public class BoardTest
         board = new Board();
         larger = new Board(12, 9);
     }
+
+	@After
+	public void tearDown() {
+		board = null;
+		larger = null;
+	}
     
     @Test
     public void checkFillColumnLarger() {

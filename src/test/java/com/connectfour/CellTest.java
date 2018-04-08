@@ -5,12 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-import com.connectfour.Cell;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 public class CellTest {
 	private Cell cell;
@@ -20,6 +14,11 @@ public class CellTest {
     public void setUp(){
         cell = new Cell();
     }
+
+	@After
+	public void tearDown() {
+		cell = null;
+	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void checkSetColorException() {

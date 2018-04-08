@@ -22,7 +22,14 @@ public class RankingTest {
 		ranking = new Ranking(player);
 		rankingTwo = new Ranking();
     }
-	
+
+	@After
+	public void tearDown() {
+		player = null;
+		ranking = null;
+		rankingTwo = null;
+	}
+
 	@Test
 	public void checkSetPlayer() {
 		rankingTwo.setPlayer(player);

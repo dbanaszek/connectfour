@@ -4,12 +4,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.connectfour.Player;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 
 public class PlayerTest {
 	
@@ -19,6 +16,11 @@ public class PlayerTest {
 	public void setUp(){
 		player = new Player("Nick");
     }
+
+	@After
+	public void tearDown() {
+		player = null;
+	}
 	
 	@Test
 	public void createPlayer() {
