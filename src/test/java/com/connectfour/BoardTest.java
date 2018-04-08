@@ -1,27 +1,32 @@
 package com.connectfour;
 
+import org.easetech.easytest.annotation.Param;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import com.connectfour.Board;
+import org.junit.runner.RunWith;
+import org.easetech.easytest.annotation.DataLoader;
+import org.easetech.easytest.runner.DataDrivenTestRunner;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 
 /**
  * Unit test for simple Board.
  */
+@RunWith(DataDrivenTestRunner.class)
 public class BoardTest
 {
     private Board board;
     private Board larger;
+    private String[] red;
 
     @Before
     public void setUp(){
+    	red = new String[12];
         board = new Board();
         larger = new Board(12, 9);
     }
@@ -104,20 +109,42 @@ public class BoardTest
     	board.checkRow(52);
     	assertEquals(true, true);
     }
+
+
+    private boolean placeCell(boolean red, int column){
+		if(red){
+			larger.fillCell("red", column);
+			return false;
+		}
+		else{
+			larger.fillCell("green", column);
+			return true;
+		}
+	}
     
     @Test
-    public void checkColumnGreen() {
-    	
-    	for(int i = 0; i < 2; i++ ){
-            larger.fillCell("green", 5);
-            larger.fillCell("red", 5);
-        }
-    	
-    	for(int i = 0; i < 4; i++ ){
-    		larger.fillCell("green", 5);
-    	}
-    	
-    	assertThat(larger.checkColumn(5), equalTo("green"));
+	@DataLoader(filePaths = "ColumnGreen.csv")
+    public void checkColumnGreen(
+    		@Param(name = "c1") int c1,  //5
+			@Param(name = "c2") int c2,  //2
+			@Param(name = "c3") int c3   //10
+	) {
+    	boolean red = false;
+
+    	for(int i = 0; i < 4; i++){
+    		 red = placeCell(red, c1);
+		}
+
+		red = false;
+
+		for(int i = 0; i < 7; i++){
+			if(red)
+				red = placeCell(red, c2);
+			else
+				red = placeCell(red, c3);
+		}
+		
+    	assertThat(larger.checkColumn(10), equalTo("green"));
     }
     
     @Test
@@ -193,7 +220,7 @@ public class BoardTest
     
     @Test
     public void checkRightDiagonalFalseOneArgument() {
-    	
+
     	board.fillCell("red", 2);
     	for(int i = 3; i < 6; i++) {
     		board.fillCell("green", i);

@@ -1,7 +1,5 @@
 package com.connectfour;
 
-import com.connectfour.Board;
-
 import java.util.Scanner;
 
 public class GameStatus {

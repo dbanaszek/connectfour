@@ -1,7 +1,5 @@
 package com.connectfour;
 
-import com.connectfour.Player;
-
 public class Ranking {
 	
 	private Player player;
